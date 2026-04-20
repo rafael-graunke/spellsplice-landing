@@ -60,7 +60,7 @@
         .font-forque { font-family: 'Forque', system-ui, sans-serif; }
     </style>
 </head>
-<body class="bg-violet-50 text-slate-600 min-h-screen">
+<body class="bg-violet-50 text-slate-600 min-h-screen flex flex-col">
 
     <!-- Nav -->
     <header class="border-b border-violet-200 px-10 py-5">
@@ -73,19 +73,26 @@
     </header>
 
     <!-- Hero -->
-    <main class="max-w-3xl mx-auto px-6 text-center py-24">
+    <main class="flex-grow max-w-3xl mx-auto px-6 text-center py-24">
         <img src="/assets/logo.svg" alt="Spellsplice logo" width="238" height="144" class="h-36 w-auto mx-auto mb-8" fetchpriority="high" />
-        <h1 class="font-forque text-6xl text-slate-900 leading-none tracking-tight mb-6">
+        <h1 class="sr-only">Spellsplice — Magic: The Gathering Video Overlay Editor</h1>
+        <p class="font-forque text-6xl text-slate-900 leading-none tracking-tight mb-6">
             Every spell.<br/>On record.
-        </h1>
+        </p>
         <p class="text-lg text-slate-500 max-w-xl mx-auto mb-10">
             Spellsplice is a unofficial open-source Magic: The Gathering tool that lets you build a synchronized timeline of in-game events — life changes, draws, reveals — and overlay them on your match footage.
         </p>
         <div class="inline-grid grid-cols-2 gap-3">
-            <a href="https://app.spellsplice.com" target="_blank" rel="noopener noreferrer"
-               class="col-span-2 flex justify-center items-center gap-2 bg-purple-600 text-white font-semibold px-6 py-3 rounded-2xl hover:bg-purple-700 transition-colors">
-                Launch the Editor
-            </a>
+            <div class="col-span-2 relative group">
+                <button disabled aria-disabled="true"
+                        class="w-full flex justify-center items-center gap-2 bg-purple-600 text-white font-semibold px-6 py-3 rounded-2xl opacity-50 cursor-not-allowed">
+                    Launch the Editor
+                </button>
+                <div class="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap bg-slate-800 text-white text-xs font-medium px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                    Editor is under construction
+                    <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-800"></div>
+                </div>
+            </div>
             <a href="https://ko-fi.com/rafagraunke" target="_blank" rel="noopener noreferrer"
                class="flex justify-center items-center gap-2 bg-[#72A9F5] text-white font-semibold px-6 py-3 rounded-2xl hover:opacity-85 transition-opacity">
                <img src="/assets/kofi_brandasset/kofi_symbol.svg" alt="" width="25" height="20" class="h-5 w-auto" />
