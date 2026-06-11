@@ -51,6 +51,7 @@
     </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <style>
         @font-face {
             font-family: 'Forque';
@@ -108,71 +109,6 @@
             background: #9b7ee0;
             flex-shrink: 0;
         }
-        .feature-row {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 32px;
-            align-items: center;
-            padding: 56px 0;
-            border-bottom: 0.5px solid rgba(180,160,255,0.08);
-        }
-        .feature-row:last-child { border-bottom: none; }
-        @media (min-width: 1024px) {
-            .feature-row { grid-template-columns: 1fr 1fr; gap: 64px; }
-            .feature-row-reverse .feature-row-visual { order: 2; }
-            .feature-row-reverse .feature-row-text   { order: 1; }
-        }
-        .feature-row-visual {
-            border-radius: 14px;
-            overflow: hidden;
-            border: 0.5px solid rgba(180,160,255,0.15);
-            background: #130f22;
-        }
-        .feature-row-visual img { width: 100%; display: block; }
-        .feature-row-label {
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: #9b7ee0;
-            margin-bottom: 10px;
-        }
-        .feature-row-title {
-            font-size: 26px;
-            font-weight: 700;
-            color: #f0ecff;
-            line-height: 1.2;
-            margin-bottom: 14px;
-        }
-        .feature-row-desc {
-            font-size: 15px;
-            color: #a099b8;
-            line-height: 1.75;
-            margin-bottom: 24px;
-        }
-        .feature-bullets {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .feature-bullets li {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 13px;
-            color: #ddd8f0;
-        }
-        .feature-bullets li::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #7c5cbf;
-            flex-shrink: 0;
-        }
         @media (prefers-reduced-motion: reduce) {
             * { transition: none !important; }
         }
@@ -192,7 +128,8 @@
                 <img src="/assets/logo.svg" alt="Spellsplice logo" width="66" height="40" class="h-10 w-auto" />
                 <span class="font-forque text-3xl text-[#f0ecff]">SpellsplicE</span>
             </div>
-            <div class="flex items-center gap-3">
+            <!-- Desktop nav -->
+            <div class="hidden md:flex items-center gap-3">
                 <!-- Ko-fi icon -->
                 <a href="https://ko-fi.com/rafagraunke" target="_blank" rel="noopener noreferrer" aria-label="Support me on Ko-fi"
                    class="flex items-center justify-center w-9 h-9 rounded-xl bg-[#130f22] border border-[rgba(180,160,255,0.15)] hover:opacity-80 transition-opacity">
@@ -214,6 +151,33 @@
                     <div class="pointer-events-none absolute -bottom-10 right-0 whitespace-nowrap bg-[#130f22] text-[#e8e4f0] text-xs font-medium px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity border border-[rgba(180,160,255,0.2)]">
                         Editor is under construction
                         <div class="absolute bottom-full right-4 border-4 border-transparent border-b-[#130f22]"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile hamburger -->
+            <div class="relative md:hidden">
+                <button id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false"
+                        class="flex items-center justify-center w-9 h-9 rounded-xl bg-[#130f22] border border-[rgba(180,160,255,0.15)] text-[#e8e4f0] hover:opacity-80 transition-opacity">
+                    <i data-lucide="menu" class="w-5 h-5" id="mobile-menu-icon"></i>
+                </button>
+                <div id="mobile-menu" class="hidden absolute right-0 top-full mt-2 w-52 bg-[#130f22] border border-[rgba(180,160,255,0.2)] rounded-xl p-2 flex-col gap-1 shadow-xl z-50">
+                    <a href="https://ko-fi.com/rafagraunke" target="_blank" rel="noopener noreferrer"
+                       class="flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-[rgba(180,160,255,0.08)] text-sm text-[#e8e4f0] transition-colors">
+                        <img src="/assets/kofi_brandasset/kofi_symbol.svg" alt="" class="h-4 w-auto" />
+                        Support on Ko-fi
+                    </a>
+                    <a href="https://github.com/rafael-graunke/spellsplice" target="_blank" rel="noopener noreferrer"
+                       class="flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-[rgba(180,160,255,0.08)] text-sm text-[#e8e4f0] transition-colors">
+                        <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                        </svg>
+                        Star on GitHub
+                    </a>
+                    <div class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-[#e8e4f0] opacity-40 cursor-not-allowed">
+                        <i data-lucide="zap" class="w-4 h-4 shrink-0"></i>
+                        Launch Editor
+                        <span class="ml-auto text-xs text-[#9b7ee0]">Soon</span>
                     </div>
                 </div>
             </div>
@@ -280,13 +244,7 @@
                 <!-- Card 1 — Timeline -->
                 <div class="feature-card">
                     <div class="feature-icon-wrap" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="2" y1="12" x2="22" y2="12"/>
-                            <circle cx="7" cy="12" r="2.5" fill="currentColor" stroke="none"/>
-                            <circle cx="17" cy="12" r="2.5" fill="currentColor" stroke="none" opacity="0.45"/>
-                            <line x1="7" y1="5" x2="7" y2="9.5"/>
-                            <line x1="17" y1="14.5" x2="17" y2="19"/>
-                        </svg>
+                        <i data-lucide="activity"></i>
                     </div>
                     <h3>Synchronized Timeline</h3>
                     <p>Mark life totals, draws, and events directly on the video with precision.</p>
@@ -295,11 +253,7 @@
                 <!-- Card 2 — Overlay -->
                 <div class="feature-card">
                     <div class="feature-icon-wrap" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
-                            <polyline points="2 12 12 17 22 12"/>
-                            <polyline points="2 17 12 22 22 17"/>
-                        </svg>
+                        <i data-lucide="layers"></i>
                     </div>
                     <h3>Footage Overlay</h3>
                     <p>Superimpose match information onto your video for visual storytelling.</p>
@@ -308,10 +262,7 @@
                 <!-- Card 3 — Open Source -->
                 <div class="feature-card">
                     <div class="feature-icon-wrap" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 2a14.5 14.5 0 0 0 0 20M12 2a14.5 14.5 0 0 1 0 20M2 12h20"/>
-                        </svg>
+                        <i data-lucide="globe"></i>
                     </div>
                     <h3>Open Source</h3>
                     <p>Unofficial fan content. Free and open source for the community.</p>
@@ -328,69 +279,69 @@
             <h2 class="font-forque" style="font-size: 32px; font-weight: 700; color: #e8e4f0;">Everything you need to document a match</h2>
 
             <!-- Row 1 — Timeline -->
-            <div class="feature-row" style="margin-top: 48px;">
-                <div class="feature-row-visual">
-                    <img data-zoomable src="/assets/screenshots/timeline.png" alt="Synchronized timeline showing in-game events" class="cursor-zoom-in hover:opacity-90 transition-opacity" style="object-fit: cover; object-position: 0 100%; max-height: 280px;" />
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-center py-14 border-b border-[rgba(180,160,255,0.08)]">
+                <div class="rounded-[14px] overflow-hidden border border-[rgba(180,160,255,0.15)] bg-[#130f22]">
+                    <img data-zoomable src="/assets/screenshots/timeline.png" alt="Synchronized timeline showing in-game events" class="w-full h-auto block cursor-zoom-in hover:opacity-90 transition-opacity" />
                 </div>
-                <div class="feature-row-text">
-                    <div class="feature-row-label">Timeline Events</div>
-                    <h3 class="feature-row-title font-forque">Mark every moment as it happens</h3>
-                    <p class="feature-row-desc">Scrub through your footage and drop markers at the exact frame where each event occurs — life changes, draws, reveals, stack interactions. Card names autocomplete as you type.</p>
-                    <ul class="feature-bullets">
-                        <li>Events stay in sync when you re-edit</li>
-                        <li>Card name autocomplete</li>
-                        <li>Undo, scrub, and re-mark freely</li>
+                <div>
+                    <div class="text-[11px] font-semibold tracking-[0.14em] uppercase text-[#9b7ee0] mb-[10px]">Timeline Events</div>
+                    <h3 class="font-forque text-[26px] font-bold text-[#f0ecff] leading-[1.2] mb-[14px]">Mark every moment as it happens</h3>
+                    <p class="text-[15px] text-[#a099b8] leading-[1.75] mb-6">Scrub through your footage and drop markers at the exact frame where each event occurs — life changes, draws, reveals, stack interactions. Card names autocomplete as you type.</p>
+                    <ul class="list-none p-0 m-0 flex flex-col gap-[10px]">
+                        <li class="flex items-center gap-[10px] text-[13px] text-[#ddd8f0] before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#7c5cbf] before:shrink-0">Events stay in sync when you re-edit</li>
+                        <li class="flex items-center gap-[10px] text-[13px] text-[#ddd8f0] before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#7c5cbf] before:shrink-0">Card name autocomplete</li>
+                        <li class="flex items-center gap-[10px] text-[13px] text-[#ddd8f0] before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#7c5cbf] before:shrink-0">Undo, scrub, and re-mark freely</li>
                     </ul>
                 </div>
             </div>
 
             <!-- Row 2 — Game Overlay (reversed) -->
-            <div class="feature-row feature-row-reverse">
-                <div class="feature-row-visual">
-                    <img data-zoomable src="/assets/screenshots/overlay.png" alt="Game overlay showing player states on match footage" class="cursor-zoom-in hover:opacity-90 transition-opacity" style="object-fit: cover; max-height: 280px;" />
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-center py-14 border-b border-[rgba(180,160,255,0.08)]">
+                <div class="rounded-[14px] overflow-hidden border border-[rgba(180,160,255,0.15)] bg-[#130f22] md:order-2">
+                    <img data-zoomable src="/assets/screenshots/overlay.png" alt="Game overlay showing player states on match footage" class="w-full h-auto block cursor-zoom-in hover:opacity-90 transition-opacity" />
                 </div>
-                <div class="feature-row-text">
-                    <div class="feature-row-label">Game Overlay</div>
-                    <h3 class="feature-row-title font-forque">Your match, fully visible</h3>
-                    <p class="feature-row-desc">Life totals, hand size, and card art render directly on top of your footage. Both players tracked simultaneously, with card art sourced automatically.</p>
-                    <ul class="feature-bullets">
-                        <li>Both players tracked simultaneously</li>
-                        <li>Card art sourced automatically</li>
-                        <li>Windowed events for reveals and displays</li>
+                <div class="md:order-1">
+                    <div class="text-[11px] font-semibold tracking-[0.14em] uppercase text-[#9b7ee0] mb-[10px]">Game Overlay</div>
+                    <h3 class="font-forque text-[26px] font-bold text-[#f0ecff] leading-[1.2] mb-[14px]">Your match, fully visible</h3>
+                    <p class="text-[15px] text-[#a099b8] leading-[1.75] mb-6">Life totals, hand size, and card art render directly on top of your footage. Both players tracked simultaneously, with card art sourced automatically.</p>
+                    <ul class="list-none p-0 m-0 flex flex-col gap-[10px]">
+                        <li class="flex items-center gap-[10px] text-[13px] text-[#ddd8f0] before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#7c5cbf] before:shrink-0">Both players tracked simultaneously</li>
+                        <li class="flex items-center gap-[10px] text-[13px] text-[#ddd8f0] before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#7c5cbf] before:shrink-0">Card art sourced automatically</li>
+                        <li class="flex items-center gap-[10px] text-[13px] text-[#ddd8f0] before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#7c5cbf] before:shrink-0">Windowed events for reveals and displays</li>
                     </ul>
                 </div>
             </div>
 
             <!-- Row 3 — Decklist Import -->
-            <div class="feature-row">
-                <div class="feature-row-visual">
-                    <img data-zoomable src="/assets/screenshots/decklist.png" alt="Decklist import interface" class="cursor-zoom-in hover:opacity-90 transition-opacity" style="object-fit: cover; max-height: 280px;" />
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-center py-14 border-b border-[rgba(180,160,255,0.08)]">
+                <div class="rounded-[14px] overflow-hidden border border-[rgba(180,160,255,0.15)] bg-[#130f22]">
+                    <img data-zoomable src="/assets/screenshots/decklist.png" alt="Decklist import interface" class="w-full h-auto block cursor-zoom-in hover:opacity-90 transition-opacity" />
                 </div>
-                <div class="feature-row-text">
-                    <div class="feature-row-label">Decklist Import</div>
-                    <h3 class="feature-row-title font-forque">Paste your list, annotate faster</h3>
-                    <p class="feature-row-desc">Import decklists from MTGO export format. Cards in the list surface first in autocomplete and are pre-cached — so you spend less time searching and more time annotating.</p>
-                    <ul class="feature-bullets">
-                        <li>MTGO export format supported</li>
-                        <li>Maindeck and sideboard parsed separately</li>
-                        <li>Deck cards prioritized in autocomplete</li>
+                <div>
+                    <div class="text-[11px] font-semibold tracking-[0.14em] uppercase text-[#9b7ee0] mb-[10px]">Decklist Import</div>
+                    <h3 class="font-forque text-[26px] font-bold text-[#f0ecff] leading-[1.2] mb-[14px]">Paste your list, annotate faster</h3>
+                    <p class="text-[15px] text-[#a099b8] leading-[1.75] mb-6">Import decklists from MTGO export format. Cards in the list surface first in autocomplete and are pre-cached — so you spend less time searching and more time annotating.</p>
+                    <ul class="list-none p-0 m-0 flex flex-col gap-[10px]">
+                        <li class="flex items-center gap-[10px] text-[13px] text-[#ddd8f0] before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#7c5cbf] before:shrink-0">MTGO export format supported</li>
+                        <li class="flex items-center gap-[10px] text-[13px] text-[#ddd8f0] before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#7c5cbf] before:shrink-0">Maindeck and sideboard parsed separately</li>
+                        <li class="flex items-center gap-[10px] text-[13px] text-[#ddd8f0] before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#7c5cbf] before:shrink-0">Deck cards prioritized in autocomplete</li>
                     </ul>
                 </div>
             </div>
 
             <!-- Row 4 — In-browser export (reversed) -->
-            <div class="feature-row feature-row-reverse">
-                <div class="feature-row-visual">
-                    <img data-zoomable src="/assets/screenshots/export.png" alt="In-browser video export dialog" class="cursor-zoom-in hover:opacity-90 transition-opacity" style="object-fit: cover; max-height: 280px;" />
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-center py-14">
+                <div class="rounded-[14px] overflow-hidden border border-[rgba(180,160,255,0.15)] bg-[#130f22] md:order-2">
+                    <img data-zoomable src="/assets/screenshots/export.png" alt="In-browser video export dialog" class="w-full h-auto block cursor-zoom-in hover:opacity-90 transition-opacity" />
                 </div>
-                <div class="feature-row-text">
-                    <div class="feature-row-label">Video Export</div>
-                    <h3 class="feature-row-title font-forque">Export straight from the browser</h3>
-                    <p class="feature-row-desc">No software to install. The overlay is composited onto your footage entirely in-browser using WebCodecs and WebGL — then saved directly to your machine.</p>
-                    <ul class="feature-bullets">
-                        <li>No installs, no uploads</li>
-                        <li>H.264/MP4 or VP9/WebM output</li>
-                        <li>30 or 60 fps, 1920×1080</li>
+                <div class="md:order-1">
+                    <div class="text-[11px] font-semibold tracking-[0.14em] uppercase text-[#9b7ee0] mb-[10px]">Video Export</div>
+                    <h3 class="font-forque text-[26px] font-bold text-[#f0ecff] leading-[1.2] mb-[14px]">Export straight from the browser</h3>
+                    <p class="text-[15px] text-[#a099b8] leading-[1.75] mb-6">No software to install. The overlay is composited onto your footage entirely in-browser using WebCodecs and WebGL — then saved directly to your machine.</p>
+                    <ul class="list-none p-0 m-0 flex flex-col gap-[10px]">
+                        <li class="flex items-center gap-[10px] text-[13px] text-[#ddd8f0] before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#7c5cbf] before:shrink-0">No installs, no uploads</li>
+                        <li class="flex items-center gap-[10px] text-[13px] text-[#ddd8f0] before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#7c5cbf] before:shrink-0">H.264/MP4 or VP9/WebM output</li>
+                        <li class="flex items-center gap-[10px] text-[13px] text-[#ddd8f0] before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#7c5cbf] before:shrink-0">30 or 60 fps, 1920×1080</li>
                     </ul>
                 </div>
             </div>
@@ -406,6 +357,9 @@
     </footer>
 
     <script>
+        lucide.createIcons();
+
+        // Lightbox
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         document.querySelectorAll('[data-zoomable]').forEach(img => {
@@ -413,6 +367,25 @@
         });
         lightbox.onclick = () => lightbox.classList.add('hidden');
         document.addEventListener('keydown', e => { if (e.key === 'Escape') lightbox.classList.add('hidden'); });
+
+        // Mobile menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        function openMenu() {
+            mobileMenu.style.display = 'flex';
+            mobileMenuBtn.setAttribute('aria-expanded', 'true');
+        }
+        function closeMenu() {
+            mobileMenu.style.display = 'none';
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        }
+        mobileMenuBtn.addEventListener('click', e => {
+            e.stopPropagation();
+            mobileMenu.style.display === 'flex' ? closeMenu() : openMenu();
+        });
+        document.addEventListener('click', e => {
+            if (mobileMenu.style.display === 'flex' && !mobileMenuBtn.contains(e.target)) closeMenu();
+        });
     </script>
 </body>
 </html>
