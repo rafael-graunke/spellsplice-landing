@@ -9,7 +9,7 @@
     <meta name="description" content="Spellsplice is an unofficial open-source Magic: The Gathering video overlay editor. Build a synchronized timeline of in-game events — life totals, draws, reveals, stack interactions — and overlay them live on your match footage." />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://spellsplice.com" />
-    <meta name="theme-color" content="#ede5ff" />
+    <meta name="theme-color" content="#0f0c1a" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -58,63 +58,216 @@
             font-display: swap;
         }
         .font-forque { font-family: 'Forque', system-ui, sans-serif; }
+
+        .feature-card {
+            background: #130f22;
+            border: 0.5px solid rgba(180,160,255,0.15);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .feature-icon-wrap {
+            width: 36px;
+            height: 36px;
+            background: rgba(124,92,191,0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            color: #b89af0;
+        }
+        .feature-icon-wrap svg { width: 18px; height: 18px; }
+        .feature-card h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ddd8f0;
+            margin-bottom: 6px;
+        }
+        .feature-card p {
+            font-size: 13px;
+            color: #7a7090;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .section-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #9b7ee0;
+            margin-bottom: 12px;
+        }
+        .section-eyebrow::before {
+            content: '';
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: #9b7ee0;
+            flex-shrink: 0;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none !important; }
+        }
+
+        /* Base colors — Tailwind CDN doesn't support custom config reliably */
+        body    { background: #0f0c1a; color: #e8e4f0; }
+        header  { background: #120f22; border-color: rgba(180,160,255,0.2); }
+        footer  { border-color: rgba(180,160,255,0.1); color: #a099b8; }
     </style>
 </head>
-<body class="bg-violet-50 text-slate-600 min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col">
 
     <!-- Nav -->
-    <header class="border-b border-violet-200 px-10 py-5">
-        <div>
-            <div class="flex flex-row content-start justify-start items-center gap-3">
+    <header class="border-b px-10 py-4 sticky top-0 z-40">
+        <div class="flex flex-row items-center justify-between">
+            <div class="flex flex-row items-center gap-3">
                 <img src="/assets/logo.svg" alt="Spellsplice logo" width="66" height="40" class="h-10 w-auto" />
-                <span class="font-forque text-3xl text-slate-900">Spellsplice</span>
+                <span class="font-forque text-3xl text-[#f0ecff]">SpellsplicE</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <!-- Ko-fi icon -->
+                <a href="https://ko-fi.com/rafagraunke" target="_blank" rel="noopener noreferrer" aria-label="Support me on Ko-fi"
+                   class="flex items-center justify-center w-9 h-9 rounded-xl bg-[#130f22] border border-[rgba(180,160,255,0.15)] hover:opacity-80 transition-opacity">
+                    <img src="/assets/kofi_brandasset/kofi_symbol.svg" alt="" width="20" height="16" class="h-4 w-auto" />
+                </a>
+                <!-- GitHub icon -->
+                <a href="https://github.com/rafael-graunke/spellsplice" target="_blank" rel="noopener noreferrer" aria-label="Star on GitHub"
+                   class="flex items-center justify-center w-9 h-9 rounded-xl bg-[#130f22] border border-[rgba(180,160,255,0.15)] hover:opacity-80 transition-opacity text-[#e8e4f0]">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                    </svg>
+                </a>
+                <!-- Launch button -->
+                <div class="relative group">
+                    <button disabled aria-disabled="true"
+                            class="flex items-center gap-2 bg-[#7c5cbf] text-white font-semibold px-5 py-2 rounded-xl opacity-50 cursor-not-allowed text-sm">
+                        Launch the Editor
+                    </button>
+                    <div class="pointer-events-none absolute -bottom-10 right-0 whitespace-nowrap bg-[#130f22] text-[#e8e4f0] text-xs font-medium px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity border border-[rgba(180,160,255,0.2)]">
+                        Editor is under construction
+                        <div class="absolute bottom-full right-4 border-4 border-transparent border-b-[#130f22]"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Hero -->
-    <main class="flex-grow max-w-3xl mx-auto px-6 text-center py-24">
-        <img src="/assets/logo.svg" alt="Spellsplice logo" width="238" height="144" class="h-36 w-auto mx-auto mb-8" fetchpriority="high" />
-        <h1 class="sr-only">Spellsplice — Magic: The Gathering Video Overlay Editor</h1>
-        <p class="font-forque text-6xl text-slate-900 leading-none tracking-tight mb-6">
-            Every spell.<br/>On record.
-        </p>
-        <p class="text-lg text-slate-500 max-w-xl mx-auto mb-10">
-            Spellsplice is a unofficial open-source Magic: The Gathering tool that lets you build a synchronized timeline of in-game events — life changes, draws, reveals — and overlay them on your match footage.
-        </p>
-        <div class="inline-grid grid-cols-2 gap-3">
-            <div class="col-span-2 relative group">
-                <button disabled aria-disabled="true"
-                        class="w-full flex justify-center items-center gap-2 bg-purple-600 text-white font-semibold px-6 py-3 rounded-2xl opacity-50 cursor-not-allowed">
-                    Launch the Editor
-                </button>
-                <div class="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap bg-slate-800 text-white text-xs font-medium px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
-                    Editor is under construction
-                    <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-800"></div>
+    <!-- Hero + Screenshot -->
+    <div class="flex-grow max-w-7xl mx-auto px-10 py-10 lg:flex lg:items-center lg:gap-12">
+
+        <!-- Hero (left on lg) -->
+        <main class="flex-shrink-0 lg:w-2/5 flex flex-col items-center text-center">
+<h1 class="sr-only">Spellsplice — Magic: The Gathering Video Overlay Editor</h1>
+            <p class="font-forque text-6xl text-[#f0ecff] leading-none tracking-tight mb-6">
+                Every spell.<br/><span style="color:#b89af0">On record.</span>
+            </p>
+            <p class="text-lg text-[#a099b8] max-w-xl mb-10">
+                Spellsplice is a unofficial open-source Magic: The Gathering tool that lets you build a synchronized timeline of in-game events — life changes, draws, reveals — and overlay them on your match footage.
+            </p>
+            <div class="inline-grid grid-cols-2 gap-3">
+                <div class="col-span-2 relative group">
+                    <button disabled aria-disabled="true"
+                            class="w-full flex justify-center items-center gap-2 bg-[#7c5cbf] text-white font-semibold px-6 py-3 rounded-2xl opacity-50 cursor-not-allowed">
+                        Launch the Editor
+                    </button>
+                    <div class="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#130f22] text-[#e8e4f0] text-xs font-medium px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity border border-[rgba(180,160,255,0.2)]">
+                        Editor is under construction
+                        <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-[#130f22]"></div>
+                    </div>
                 </div>
+                <a href="https://ko-fi.com/rafagraunke" target="_blank" rel="noopener noreferrer"
+                   class="col-span-2 md:col-span-1 lg:col-span-2 xl:col-span-1 flex justify-center items-center gap-2 bg-[#130f22] text-white font-semibold px-5 py-3 rounded-2xl border border-[rgba(180,160,255,0.15)] hover:opacity-85 transition-opacity">
+                   <img src="/assets/kofi_brandasset/kofi_symbol.svg" alt="" width="25" height="20" class="h-5 w-auto" />
+                    Support me on Ko-fi
+                </a>
+                <a href="https://github.com/rafael-graunke/spellsplice" target="_blank" rel="noopener noreferrer"
+                   class="col-span-2 md:col-span-1 lg:col-span-2 xl:col-span-1 flex justify-center items-center gap-2 bg-[#130f22] text-white font-semibold px-6 py-3 rounded-2xl border border-[rgba(180,160,255,0.15)] hover:opacity-85 transition-opacity">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                    </svg>
+                    Star on GitHub
+                </a>
             </div>
-            <a href="https://ko-fi.com/rafagraunke" target="_blank" rel="noopener noreferrer"
-               class="flex justify-center items-center gap-2 bg-[#72A9F5] text-white font-semibold px-6 py-3 rounded-2xl hover:opacity-85 transition-opacity">
-               <img src="/assets/kofi_brandasset/kofi_symbol.svg" alt="" width="25" height="20" class="h-5 w-auto" />
-                Support me on Ko-fi
-            </a>
-            <a href="https://github.com/rafael-graunke/spellsplice" target="_blank" rel="noopener noreferrer"
-               class="flex justify-center items-center gap-2 bg-[#24292e] text-white font-semibold px-6 py-3 rounded-2xl hover:opacity-85 transition-opacity">
-                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
-                </svg>
-                Star on GitHub
-            </a>
-            
+        </main>
+
+        <!-- Screenshot (right on lg) -->
+        <div class="lg:flex-1 pb-16 mt-10 lg:mt-0 lg:pb-0">
+            <img id="screenshot" src="/assets/screenshot.png" alt="Spellsplice editor showing a Magic: The Gathering match with card overlays, player state boxes, and a synchronized event timeline" width="1536" height="784" class="w-full rounded-2xl shadow-2xl hover:opacity-90 transition-opacity cursor-zoom-in border border-[rgba(180,160,255,0.15)]" />
+
+            <!-- Lightbox -->
+            <div id="lightbox" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden p-6 cursor-zoom-out">
+                <img src="/assets/screenshot.png" alt="" class="max-w-full max-h-full rounded-xl shadow-2xl" />
+            </div>
         </div>
-    </main>
+
+    </div>
+
+    <!-- Por que usar -->
+    <section style="border-top: 0.5px solid rgba(180,160,255,0.1); padding: 48px 40px 64px;">
+        <div style="max-width: 1100px; margin: 0 auto;">
+            <div class="section-eyebrow">Why use it</div>
+            <h2 class="font-forque" style="font-size: 32px; font-weight: 700; color: #e8e4f0;">Built for creators</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 32px;">
+
+                <!-- Card 1 — Timeline -->
+                <div class="feature-card">
+                    <div class="feature-icon-wrap" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="2" y1="12" x2="22" y2="12"/>
+                            <circle cx="7" cy="12" r="2.5" fill="currentColor" stroke="none"/>
+                            <circle cx="17" cy="12" r="2.5" fill="currentColor" stroke="none" opacity="0.45"/>
+                            <line x1="7" y1="5" x2="7" y2="9.5"/>
+                            <line x1="17" y1="14.5" x2="17" y2="19"/>
+                        </svg>
+                    </div>
+                    <h3>Synchronized Timeline</h3>
+                    <p>Mark life totals, draws, and events directly on the video with precision.</p>
+                </div>
+
+                <!-- Card 2 — Overlay -->
+                <div class="feature-card">
+                    <div class="feature-icon-wrap" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                            <polyline points="2 12 12 17 22 12"/>
+                            <polyline points="2 17 12 22 22 17"/>
+                        </svg>
+                    </div>
+                    <h3>Footage Overlay</h3>
+                    <p>Superimpose match information onto your video for visual storytelling.</p>
+                </div>
+
+                <!-- Card 3 — Open Source -->
+                <div class="feature-card">
+                    <div class="feature-icon-wrap" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 2a14.5 14.5 0 0 0 0 20M12 2a14.5 14.5 0 0 1 0 20M2 12h20"/>
+                        </svg>
+                    </div>
+                    <h3>Open Source</h3>
+                    <p>Unofficial fan content. Free and open source for the community.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="border-t border-violet-200 px-10 py-6 text-sm text-slate-400">
+    <footer class="border-t px-10 py-6 text-sm">
         <p>Built for content creators.</p>
-        <p class="text-xs mt-2">Spellsplice is unofficial Fan Content permitted under the <a href="https://company.wizards.com/en/legal/fancontentpolicy" class="underline" target="_blank" rel="noopener noreferrer">Wizards of the Coast Fan Content Policy</a>. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.</p>
-        <p class="text-xs mt-1">Wordmark uses <a href="https://www.fontsquirrel.com/fonts/forque" class="underline" target="_blank" rel="noopener noreferrer">FORQUE</a> by Tup Wanders (CC BY).</p>
+        <p class="text-xs mt-2">Spellsplice is unofficial Fan Content permitted under the <a href="https://company.wizards.com/en/legal/fancontentpolicy" class="underline hover:text-[#e8e4f0] transition-colors" target="_blank" rel="noopener noreferrer">Wizards of the Coast Fan Content Policy</a>. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.</p>
+        <p class="text-xs mt-1">Wordmark uses <a href="https://www.fontsquirrel.com/fonts/forque" class="underline hover:text-[#e8e4f0] transition-colors" target="_blank" rel="noopener noreferrer">FORQUE</a> by Tup Wanders (CC BY).</p>
     </footer>
 
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        document.getElementById('screenshot').onclick = () => lightbox.classList.remove('hidden');
+        lightbox.onclick = () => lightbox.classList.add('hidden');
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') lightbox.classList.add('hidden'); });
+    </script>
 </body>
 </html>
