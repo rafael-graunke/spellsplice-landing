@@ -108,6 +108,71 @@
             background: #9b7ee0;
             flex-shrink: 0;
         }
+        .feature-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            align-items: center;
+            padding: 56px 0;
+            border-bottom: 0.5px solid rgba(180,160,255,0.08);
+        }
+        .feature-row:last-child { border-bottom: none; }
+        @media (min-width: 1024px) {
+            .feature-row { grid-template-columns: 1fr 1fr; gap: 64px; }
+            .feature-row-reverse .feature-row-visual { order: 2; }
+            .feature-row-reverse .feature-row-text   { order: 1; }
+        }
+        .feature-row-visual {
+            border-radius: 14px;
+            overflow: hidden;
+            border: 0.5px solid rgba(180,160,255,0.15);
+            background: #130f22;
+        }
+        .feature-row-visual img { width: 100%; display: block; }
+        .feature-row-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #9b7ee0;
+            margin-bottom: 10px;
+        }
+        .feature-row-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #f0ecff;
+            line-height: 1.2;
+            margin-bottom: 14px;
+        }
+        .feature-row-desc {
+            font-size: 15px;
+            color: #a099b8;
+            line-height: 1.75;
+            margin-bottom: 24px;
+        }
+        .feature-bullets {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .feature-bullets li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: #ddd8f0;
+        }
+        .feature-bullets li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #7c5cbf;
+            flex-shrink: 0;
+        }
         @media (prefers-reduced-motion: reduce) {
             * { transition: none !important; }
         }
@@ -195,11 +260,11 @@
 
         <!-- Screenshot (right on lg) -->
         <div class="lg:flex-1 pb-16 mt-10 lg:mt-0 lg:pb-0">
-            <img id="screenshot" src="/assets/screenshot.png" alt="Spellsplice editor showing a Magic: The Gathering match with card overlays, player state boxes, and a synchronized event timeline" width="1536" height="784" class="w-full rounded-2xl shadow-2xl hover:opacity-90 transition-opacity cursor-zoom-in border border-[rgba(180,160,255,0.15)]" />
+            <img id="screenshot" data-zoomable src="/assets/screenshots/app.png" alt="Spellsplice editor showing a Magic: The Gathering match with card overlays, player state boxes, and a synchronized event timeline" width="1536" height="784" class="w-full rounded-2xl shadow-2xl hover:opacity-90 transition-opacity cursor-zoom-in border border-[rgba(180,160,255,0.15)]" />
 
             <!-- Lightbox -->
             <div id="lightbox" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden p-6 cursor-zoom-out">
-                <img src="/assets/screenshot.png" alt="" class="max-w-full max-h-full rounded-xl shadow-2xl" />
+                <img id="lightbox-img" src="" alt="" class="rounded-xl shadow-2xl" style="max-width: 80%; max-height: 80vh;" />
             </div>
         </div>
 
@@ -256,6 +321,83 @@
         </div>
     </section>
 
+    <!-- Deep features -->
+    <section style="border-top: 0.5px solid rgba(180,160,255,0.1); padding: 64px 40px;">
+        <div style="max-width: 1100px; margin: 0 auto;">
+            <div class="section-eyebrow">Features</div>
+            <h2 class="font-forque" style="font-size: 32px; font-weight: 700; color: #e8e4f0;">Everything you need to document a match</h2>
+
+            <!-- Row 1 — Timeline -->
+            <div class="feature-row" style="margin-top: 48px;">
+                <div class="feature-row-visual">
+                    <img data-zoomable src="/assets/screenshots/timeline.png" alt="Synchronized timeline showing in-game events" class="cursor-zoom-in hover:opacity-90 transition-opacity" style="object-fit: cover; object-position: 0 100%; max-height: 280px;" />
+                </div>
+                <div class="feature-row-text">
+                    <div class="feature-row-label">Timeline Events</div>
+                    <h3 class="feature-row-title font-forque">Mark every moment as it happens</h3>
+                    <p class="feature-row-desc">Scrub through your footage and drop markers at the exact frame where each event occurs — life changes, draws, reveals, stack interactions. Card names autocomplete as you type.</p>
+                    <ul class="feature-bullets">
+                        <li>Events stay in sync when you re-edit</li>
+                        <li>Card name autocomplete</li>
+                        <li>Undo, scrub, and re-mark freely</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Row 2 — Game Overlay (reversed) -->
+            <div class="feature-row feature-row-reverse">
+                <div class="feature-row-visual">
+                    <img data-zoomable src="/assets/screenshots/overlay.png" alt="Game overlay showing player states on match footage" class="cursor-zoom-in hover:opacity-90 transition-opacity" style="object-fit: cover; max-height: 280px;" />
+                </div>
+                <div class="feature-row-text">
+                    <div class="feature-row-label">Game Overlay</div>
+                    <h3 class="feature-row-title font-forque">Your match, fully visible</h3>
+                    <p class="feature-row-desc">Life totals, hand size, and card art render directly on top of your footage. Both players tracked simultaneously, with card art sourced automatically.</p>
+                    <ul class="feature-bullets">
+                        <li>Both players tracked simultaneously</li>
+                        <li>Card art sourced automatically</li>
+                        <li>Windowed events for reveals and displays</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Row 3 — Decklist Import -->
+            <div class="feature-row">
+                <div class="feature-row-visual">
+                    <img data-zoomable src="/assets/screenshots/decklist.png" alt="Decklist import interface" class="cursor-zoom-in hover:opacity-90 transition-opacity" style="object-fit: cover; max-height: 280px;" />
+                </div>
+                <div class="feature-row-text">
+                    <div class="feature-row-label">Decklist Import</div>
+                    <h3 class="feature-row-title font-forque">Paste your list, annotate faster</h3>
+                    <p class="feature-row-desc">Import decklists from MTGO export format. Cards in the list surface first in autocomplete and are pre-cached — so you spend less time searching and more time annotating.</p>
+                    <ul class="feature-bullets">
+                        <li>MTGO export format supported</li>
+                        <li>Maindeck and sideboard parsed separately</li>
+                        <li>Deck cards prioritized in autocomplete</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Row 4 — In-browser export (reversed) -->
+            <div class="feature-row feature-row-reverse">
+                <div class="feature-row-visual">
+                    <img data-zoomable src="/assets/screenshots/export.png" alt="In-browser video export dialog" class="cursor-zoom-in hover:opacity-90 transition-opacity" style="object-fit: cover; max-height: 280px;" />
+                </div>
+                <div class="feature-row-text">
+                    <div class="feature-row-label">Video Export</div>
+                    <h3 class="feature-row-title font-forque">Export straight from the browser</h3>
+                    <p class="feature-row-desc">No software to install. The overlay is composited onto your footage entirely in-browser using WebCodecs and WebGL — then saved directly to your machine.</p>
+                    <ul class="feature-bullets">
+                        <li>No installs, no uploads</li>
+                        <li>H.264/MP4 or VP9/WebM output</li>
+                        <li>30 or 60 fps, 1920×1080</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="border-t px-10 py-6 text-sm">
         <p>Built for content creators.</p>
@@ -265,7 +407,10 @@
 
     <script>
         const lightbox = document.getElementById('lightbox');
-        document.getElementById('screenshot').onclick = () => lightbox.classList.remove('hidden');
+        const lightboxImg = document.getElementById('lightbox-img');
+        document.querySelectorAll('[data-zoomable]').forEach(img => {
+            img.onclick = () => { lightboxImg.src = img.src; lightbox.classList.remove('hidden'); };
+        });
         lightbox.onclick = () => lightbox.classList.add('hidden');
         document.addEventListener('keydown', e => { if (e.key === 'Escape') lightbox.classList.add('hidden'); });
     </script>
