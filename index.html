@@ -152,16 +152,10 @@
                     </svg>
                 </a>
                 <!-- Launch button -->
-                <div class="relative group">
-                    <button disabled aria-disabled="true"
-                            class="flex items-center gap-2 bg-[#7c5cbf] text-white font-semibold px-5 py-2 rounded-xl opacity-50 cursor-not-allowed text-sm">
-                        Launch the Editor
-                    </button>
-                    <div class="pointer-events-none absolute -bottom-10 right-0 whitespace-nowrap bg-[#130f22] text-[#e8e4f0] text-xs font-medium px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity border border-[rgba(180,160,255,0.2)]">
-                        Editor is under construction
-                        <div class="absolute bottom-full right-4 border-4 border-transparent border-b-[#130f22]"></div>
-                    </div>
-                </div>
+                <a href="https://app.spellsplice.com" target="_blank" rel="noopener noreferrer"
+                   class="flex items-center gap-2 bg-[#7c5cbf] text-white font-semibold px-5 py-2 rounded-xl hover:opacity-85 transition-opacity text-sm">
+                    Launch the Editor
+                </a>
             </div>
 
             <!-- Mobile hamburger -->
@@ -199,11 +193,11 @@
                         </svg>
                         Star on GitHub
                     </a>
-                    <div class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-[#e8e4f0] opacity-40 cursor-not-allowed">
+                    <a href="https://app.spellsplice.com" target="_blank" rel="noopener noreferrer" onclick="closeMenu()"
+                       class="flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-[rgba(180,160,255,0.08)] text-sm text-[#e8e4f0] transition-colors">
                         <i data-lucide="zap" class="w-4 h-4 shrink-0"></i>
                         Launch Editor
-                        <span class="ml-auto text-xs text-[#9b7ee0]">Soon</span>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -222,16 +216,10 @@
                 Spellsplice is a unofficial open-source Magic: The Gathering tool that lets you build a synchronized timeline of in-game events — life changes, draws, reveals — and overlay them on your match footage.
             </p>
             <div class="inline-grid grid-cols-2 gap-3">
-                <div class="col-span-2 relative group">
-                    <button disabled aria-disabled="true"
-                            class="w-full flex justify-center items-center gap-2 bg-[#7c5cbf] text-white font-semibold px-6 py-3 rounded-2xl opacity-50 cursor-not-allowed">
-                        Launch the Editor
-                    </button>
-                    <div class="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#130f22] text-[#e8e4f0] text-xs font-medium px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity border border-[rgba(180,160,255,0.2)]">
-                        Editor is under construction
-                        <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-[#130f22]"></div>
-                    </div>
-                </div>
+                <a href="https://app.spellsplice.com" target="_blank" rel="noopener noreferrer"
+                   class="col-span-2 w-full flex justify-center items-center gap-2 bg-[#7c5cbf] text-white font-semibold px-6 py-3 rounded-2xl hover:opacity-85 transition-opacity">
+                    Launch the Editor
+                </a>
                 <a href="https://ko-fi.com/rafagraunke" target="_blank" rel="noopener noreferrer"
                    class="col-span-2 md:col-span-1 lg:col-span-2 xl:col-span-1 flex justify-center items-center gap-2 bg-[#130f22] text-white font-semibold px-5 py-3 rounded-2xl border border-[rgba(180,160,255,0.15)] hover:opacity-85 transition-opacity">
                    <img src="/assets/kofi_brandasset/kofi_symbol.svg" alt="" width="25" height="20" class="h-5 w-auto" />
@@ -387,24 +375,28 @@
                     <div class="flex md:block">
                         <!-- Mobile left track -->
                         <div class="flex flex-col items-center mr-4 md:hidden" style="width: 24px; flex-shrink: 0;">
-                            <div style="width: 2px; height: 20px; background: linear-gradient(to bottom, #7c5cbf, #b89af0);"></div>
-                            <div style="flex-shrink: 0; width: 16px; height: 16px; border-radius: 50%; background: #1d1835; border: 2px solid #b89af0; box-shadow: 0 0 0 4px rgba(184,154,240,0.12), 0 0 14px rgba(124,92,191,0.5);"></div>
-                            <div style="flex: 1; width: 2px; background: rgba(180,160,255,0.3);"></div>
+                            <div style="width: 2px; height: 20px; background: #4ade80;"></div>
+                            <div style="flex-shrink: 0; width: 16px; height: 16px; border-radius: 50%; background: #4ade80; border: 2px solid #4ade80; box-shadow: 0 0 0 4px rgba(74,222,128,0.12), 0 0 14px rgba(74,222,128,0.5); display: flex; align-items: center; justify-content: center;">
+                                <i data-lucide="check" style="width: 10px; height: 10px; color: #0c0a14; stroke-width: 3;"></i>
+                            </div>
+                            <div style="flex: 1; width: 2px; background: #4ade80;"></div>
                         </div>
                         <!-- Desktop top track -->
                         <div class="hidden md:flex items-center mb-5">
-                            <div style="flex: 1; height: 2px; background: linear-gradient(90deg, #7c5cbf, #b89af0);"></div>
-                            <div style="flex-shrink: 0; width: 16px; height: 16px; border-radius: 50%; background: #1d1835; border: 2px solid #b89af0; box-shadow: 0 0 0 4px rgba(184,154,240,0.12), 0 0 14px rgba(124,92,191,0.5);"></div>
-                            <div style="flex: 1; height: 2px; background: rgba(180,160,255,0.3);"></div>
+                            <div style="flex: 1; height: 2px; background: #4ade80;"></div>
+                            <div style="flex-shrink: 0; width: 16px; height: 16px; border-radius: 50%; background: #4ade80; border: 2px solid #4ade80; box-shadow: 0 0 0 4px rgba(74,222,128,0.12), 0 0 14px rgba(74,222,128,0.5); display: flex; align-items: center; justify-content: center;">
+                                <i data-lucide="check" style="width: 10px; height: 10px; color: #0c0a14; stroke-width: 3;"></i>
+                            </div>
+                            <div style="flex: 1; height: 2px; background: #4ade80;"></div>
                         </div>
                         <!-- Card -->
                         <div class="flex-1 pb-6 md:pb-0 md:pr-3">
                             <div style="background: #130f22; border: 0.5px solid rgba(180,160,255,0.15); border-radius: 12px; padding: 20px;">
                                 <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
                                     <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #b89af0;">v1</span>
-                                    <span style="display: inline-flex; align-items: center; gap: 5px; background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.22); border-radius: 20px; padding: 2px 9px; font-size: 11px; font-weight: 600; color: #f0b429;">
-                                        <i data-lucide="clock-4" style="width: 11px; height: 11px;"></i>
-                                        Waiting Release
+                                    <span style="display: inline-flex; align-items: center; gap: 5px; background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.22); border-radius: 20px; padding: 2px 9px; font-size: 11px; font-weight: 600; color: #4ade80;">
+                                        <i data-lucide="check" style="width: 11px; height: 11px;"></i>
+                                        Released
                                     </span>
                                 </div>
                                 <h3 style="font-size: 15px; font-weight: 600; color: #e8e4f0; margin: 0 0 4px; font-family: inherit;">Export Ready</h3>
