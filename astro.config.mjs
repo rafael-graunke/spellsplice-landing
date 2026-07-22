@@ -35,6 +35,8 @@ export default defineConfig({
 					items: [
 						{ label: 'Overview', slug: 'docs' },
 						{ label: 'Getting Started', slug: 'docs/getting-started' },
+						{ label: 'Release Channels', slug: 'docs/channels' },
+						{ label: 'Running Locally', slug: 'docs/running-locally' },
 					],
 				},
 				{
